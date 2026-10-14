@@ -837,8 +837,8 @@ export class BadgeScene {
       };
     };
 
-    window.addEventListener('pointerdown', (e) => {
-      const worldPos = getPointerWorld(e.clientX, e.clientY);
+    const startDrag = (clientX, clientY) => {
+      const worldPos = getPointerWorld(clientX, clientY);
       this.raycaster.setFromCamera(this.pointer, this.camera);
       const hits = this.raycaster.intersectObject(this.frameMesh, true);
       
@@ -846,25 +846,29 @@ export class BadgeScene {
         this.isDragging = true;
         this.canvas.style.pointerEvents = 'auto';
         this.canvas.style.cursor = 'grabbing';
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none';
+
         this.grabOffset.x = this.clipPos.x - worldPos.x;
         this.grabOffset.y = this.clipPos.y - worldPos.y;
-        this.mouse.prevX = e.clientX;
-        this.mouse.prevY = e.clientY;
+        this.mouse.prevX = clientX;
+        this.mouse.prevY = clientY;
         sound.playKeyClick(true);
+        return true;
       }
-    });
+      return false;
+    };
 
-    window.addEventListener('pointermove', (e) => {
-      const worldPos = getPointerWorld(e.clientX, e.clientY);
+    const moveDrag = (clientX, clientY) => {
+      const worldPos = getPointerWorld(clientX, clientY);
 
       if (this.isDragging) {
-        e.preventDefault();
-        const dx = e.clientX - this.mouse.prevX;
-        const dy = e.clientY - this.mouse.prevY;
-        this.mouse.prevX = e.clientX;
-        this.mouse.prevY = e.clientY;
+        const dx = clientX - this.mouse.prevX;
+        const dy = clientY - this.mouse.prevY;
+        this.mouse.prevX = clientX;
+        this.mouse.prevY = clientY;
 
-        // Translasi posisi
+        // Translasi posisi kartu mengikuti jari/kursor
         const targetX = worldPos.x + this.grabOffset.x;
         const targetY = worldPos.y + this.grabOffset.y;
 
@@ -879,7 +883,7 @@ export class BadgeScene {
         this.clipPos.x += this.clipVel.x * dt;
         this.clipPos.y += this.clipVel.y * dt;
 
-        // Rotasi 360 Derajat saat ditarik kursor horizontal
+        // Rotasi 360 Derajat saat ditarik horizontal
         this.cardRot.y += dx * 0.016;
         this.cardRot.x += -dy * 0.008;
         this.cardRot.z += dx * 0.005;
@@ -895,14 +899,65 @@ export class BadgeScene {
           this.canvas.style.cursor = 'default';
         }
       }
-    });
+    };
 
-    window.addEventListener('pointerup', () => {
+    const endDrag = () => {
       if (this.isDragging) {
         this.isDragging = false;
         this.canvas.style.cursor = 'grab';
+        document.body.style.userSelect = '';
+        document.body.style.webkitUserSelect = '';
         sound.playKeyClick(false);
       }
+    };
+
+    // 1. DUKUNGAN LAYAR SENTUH (TABLET & SMARTPHONE)
+    // Menggunakan { passive: false } agar e.preventDefault() dapat mencegah browser mengambil alih scrolling saat kartu ditarik
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        const hit = startDrag(touch.clientX, touch.clientY);
+        if (hit) {
+          e.preventDefault(); // Mencegah scrolling browser dan menu sentuhan lama
+        }
+      }
+    }, { passive: false });
+
+    window.addEventListener('touchmove', (e) => {
+      if (this.isDragging && e.touches.length > 0) {
+        e.preventDefault(); // KUNCI UTAMA: Tahan gesture scroll browser saat kartu sedang ditarik jari!
+        const touch = e.touches[0];
+        moveDrag(touch.clientX, touch.clientY);
+      }
+    }, { passive: false });
+
+    window.addEventListener('touchend', () => {
+      endDrag();
+    });
+
+    window.addEventListener('touchcancel', () => {
+      endDrag();
+    });
+
+    // 2. DUKUNGAN MOUSE & POINTER (LAPTOP & DESKTOP)
+    window.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch') return; // Sudah ditangani oleh touchstart secara presisi
+      startDrag(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
+      moveDrag(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('pointerup', (e) => {
+      if (e.pointerType === 'touch') return;
+      endDrag();
+    });
+
+    window.addEventListener('pointercancel', (e) => {
+      if (e.pointerType === 'touch') return;
+      endDrag();
     });
   }
 

@@ -250,6 +250,10 @@ body {
   outline: none;
   opacity: 0;
   transition: opacity 0.4s ease;
+  touch-action: none; /* Mencegah gesture scroll default tablet/HP saat berinteraksi dengan kartu 3D */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 #hero-badge-canvas.loaded {
