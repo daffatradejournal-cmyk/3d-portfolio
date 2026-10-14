@@ -76,7 +76,7 @@ export class BadgeScene {
     this.renderer.setPixelRatio(dpr);
     this.renderer.setSize(w, h);
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.22;
+    this.renderer.toneMappingExposure = 1.02;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -85,15 +85,13 @@ export class BadgeScene {
   }
 
   setupLights() {
-    // 1. Ambient Light yang lembut dan merata (warna studio hangat Dieter Rams)
-    const ambientLight = new THREE.AmbientLight(0xfffaf0, 0.95);
+    // 1. Ambient Light lembut seimbang - mempertahankan kontras pekat dan kedalaman warna
+    const ambientLight = new THREE.AmbientLight(0xfff6ea, 0.50);
     this.scene.add(ambientLight);
 
-    // 2. Key Light Studio Berdaya Tinggi dengan Bayangan Lembut PCF
-    // Jangkauan kamera bayangan dibuat SANGAT LUAS (left: -6.5, right: 6.5)
-    // sehingga bayangan TIDAK AKAN PERNAH TERPOTONG lurus di kanan maupun kiri!
-    this.keyLight = new THREE.DirectionalLight(0xfff6e8, 3.8);
-    this.keyLight.position.set(this.defaultAnchorX + 1.2, 4.5, 4.2);
+    // 2. Key Light Studio Terarah - bayangan lembut PCF tanpa membuat wajah overexposed/silau
+    this.keyLight = new THREE.DirectionalLight(0xfff5e6, 2.3);
+    this.keyLight.position.set(this.defaultAnchorX + 1.3, 4.2, 3.8);
     this.keyLight.castShadow = true;
     this.keyLight.shadow.mapSize.width = 2048;
     this.keyLight.shadow.mapSize.height = 2048;
@@ -114,23 +112,23 @@ export class BadgeScene {
     this.keyLight.target = this.keyLightTarget;
 
     // 3. Rim / Edge Light Dingin - menonjolkan siluet tepi polikarbonat, logam, dan kain tali
-    this.rimLight = new THREE.DirectionalLight(0xdce8ff, 3.4);
+    this.rimLight = new THREE.DirectionalLight(0xdce8ff, 2.5);
     this.rimLight.position.set(-4.0, 3.5, -2.2);
     this.scene.add(this.rimLight);
 
     // 4. Fill Light Studio dari kiri - kontras seimbang tanpa bayangan mati
-    this.fillLight = new THREE.DirectionalLight(0xf2f6ff, 1.4);
+    this.fillLight = new THREE.DirectionalLight(0xf2f6ff, 0.85);
     this.fillLight.position.set(-2.5, 1.2, 3.0);
     this.scene.add(this.fillLight);
 
     // 5. Top Kicker Light - kilau logam penjepit dan karabiner
-    this.topKicker = new THREE.DirectionalLight(0xffeedd, 2.0);
+    this.topKicker = new THREE.DirectionalLight(0xffeedd, 1.8);
     this.topKicker.position.set(this.defaultAnchorX, 5.5, 1.5);
     this.scene.add(this.topKicker);
 
-    // 6. Interactive Specular Glint - kilau kaca akrilik pelindung saat kursor bergerak
-    this.specularLight = new THREE.PointLight(0xffffff, 0.65, 8, 2.0);
-    this.specularLight.position.set(this.defaultAnchorX + 1.0, 2.0, 2.5);
+    // 6. Interactive Specular Glint Halus - kilau aksen studio tanpa menyilaukan foto wajah
+    this.specularLight = new THREE.PointLight(0xfff5ea, 0.20, 6, 2.0);
+    this.specularLight.position.set(this.defaultAnchorX + 1.2, 2.2, 3.2);
     this.scene.add(this.specularLight);
   }
 
@@ -295,6 +293,8 @@ export class BadgeScene {
       }
 
       ctx.save();
+      // Meningkatkan saturasi warna dan kontras agar warna kulit segar alami dan latar merah kaya pekat
+      ctx.filter = 'contrast(1.08) saturate(1.20)';
       ctx.drawImage(img, sx, sy, sw, sh, photoX, photoY, photoW, photoH);
       ctx.restore();
     } else {
@@ -787,15 +787,15 @@ export class BadgeScene {
     slotHoleMesh.position.set(0, totalFrameH / 2 - 0.10, 0);
     this.frameMesh.add(slotHoleMesh);
 
-    // Kartu ID Depan (Ditempatkan presisi di permukaan depan frame dengan clearcoat akrilik mengkilap)
+    // Kartu ID Depan (Ditempatkan presisi di permukaan depan frame dengan saturasi kaya & kemilau satin)
     const cardGeo = new THREE.PlaneGeometry(cardWidth, cardHeight);
     const cardMat = new THREE.MeshPhysicalMaterial({
       map: this.generateCardTexture(),
-      roughness: 0.18,
-      metalness: 0.02,
-      clearcoat: 0.95,
-      clearcoatRoughness: 0.08,
-      reflectivity: 0.85
+      roughness: 0.32,
+      metalness: 0.0,
+      clearcoat: 0.25,
+      clearcoatRoughness: 0.20,
+      reflectivity: 0.45
     });
     this.cardMesh = new THREE.Mesh(cardGeo, cardMat);
     this.cardMesh.position.set(0, -0.06, frameDepth / 2 + 0.002);
