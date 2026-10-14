@@ -270,6 +270,8 @@ body {
 }
 
 .hero-content-layer > * {
+  opacity: 0;
+  transform: translateY(20px);
   will-change: transform, opacity;
 }
 

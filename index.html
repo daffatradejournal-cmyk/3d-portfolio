@@ -150,32 +150,26 @@
             // Animasi masuk sinkron & elegan bersama jatuhnya kartu 3D
             const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-            tl.fromTo('.badge-pill',
-              { opacity: 0, y: 18 },
+            tl.to('.badge-pill',
               { opacity: 1, y: 0, duration: 0.65 }
             )
-            .fromTo('.hero-main-title',
-              { opacity: 0, y: 28 },
+            .to('.hero-main-title',
               { opacity: 1, y: 0, duration: 0.75 },
               '-=0.45'
             )
-            .fromTo('.hero-sub-title',
-              { opacity: 0, y: 18 },
+            .to('.hero-sub-title',
               { opacity: 1, y: 0, duration: 0.65 },
               '-=0.45'
             )
-            .fromTo('.hero-narrative',
-              { opacity: 0, y: 18 },
+            .to('.hero-narrative',
               { opacity: 1, y: 0, duration: 0.65 },
               '-=0.45'
             )
-            .fromTo('.hero-cta-group a',
-              { opacity: 0, y: 16, scale: 0.96 },
-              { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.1 },
-              '-=0.35'
+            .to('.hero-cta-group',
+              { opacity: 1, y: 0, duration: 0.65 },
+              '-=0.45'
             )
-            .fromTo('.orbit-guide',
-              { opacity: 0, y: 14 },
+            .to('.orbit-guide',
               { opacity: 1, y: 0, duration: 0.6 },
               '-=0.3'
             );
