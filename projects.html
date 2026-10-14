@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyek — Muhammad Daffa // Junior Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Navigasi Atas -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <span class="status-dot"></span>
+        <a href="/" class="mono-brand">Muhammad Daffa &bull; Dev</a>
+        <span class="spec-divider">|</span>
+        <span class="mono-meta" id="live-clock">00:00:00 UTC // 00:00:00 WIB</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="/" class="nav-item" data-page="home">Beranda</a>
+        <a href="/about.html" class="nav-item" data-page="about">Tentang Saya</a>
+        <a href="/projects.html" class="nav-item active" data-page="projects">Proyek</a>
+        <a href="/contact.html" class="nav-item" data-page="contact">Kontak</a>
+      </nav>
+
+      <div class="nav-right">
+        <button id="sound-toggle-btn" class="hardware-btn-sm" title="Aktifkan / Matikan Suara Klik Mekanikal">
+          <span class="led-dot active" id="sound-led"></span>
+          <span id="sound-label">Suara: On</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="main-wrapper">
+      <div class="page-header">
+        <div class="page-category">STUDI KASUS REKAYASA SISTEM</div>
+        <h1 class="page-title">Dokumentasi Proyek &amp; Implementasi Perangkat Lunak</h1>
+      </div>
+
+      <div class="projects-case-list">
+
+        <!-- Proyek 01 -->
+        <article class="case-study-card">
+          <div class="case-header">
+            <span>STUDI KASUS</span>
+            <span>MANAJEMEN INVENTARIS &amp; LOGISTIK</span>
+          </div>
+          <div class="case-body">
+            <div>
+              <h2 class="case-name">Sistem Pemantauan Stok &amp; Pesanan Pergudangan Terintegrasi</h2>
+              <p class="case-text">
+                Aplikasi digital untuk mengelola stok barang dan pesanan di gudang agar pencatatan tidak lagi manual. 
+                Sistem ini memastikan jumlah stok fisik di gudang selalu cocok dengan data di sistem, terutama saat transaksi sedang ramai.
+              </p>
+
+              <div class="case-architecture">
+                <div class="arch-title">SOROTAN CARA KERJA SISTEM:</div>
+                <div class="arch-desc">
+                  Menerapkan sistem penguncian data otomatis pada database PostgreSQL sehingga dua pembeli tidak bisa berebut satu barang terakhir yang sama (mencegah stok minus). 
+                  Dilengkapi pemindai barcode untuk cek barang masuk-keluar secara instan, serta notifikasi otomatis saat persediaan barang mulai menipis.
+                </div>
+              </div>
+
+              <div class="case-tags">
+                <span>PostgreSQL</span>
+                <span>TypeScript</span>
+                <span>Manajemen Database</span>
+                <span>REST API</span>
+                <span>Kode Bersih</span>
+              </div>
+
+              <div class="case-actions">
+                <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="hardware-btn primary-btn">
+                  <span>Kode Sumber</span>
+                  <span>&nearr;</span>
+                </a>
+                <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="hardware-btn secondary-btn">
+                  <span>Demo Langsung</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="case-spec-column">
+              <div class="spec-block">
+                <span class="spec-block-lbl">PERAN UTAMA</span>
+                <span class="spec-block-val">Junior Backend &amp; Database Developer</span>
+              </div>
+              <div class="spec-block">
+                <span class="spec-block-lbl">STRUKTUR DATA</span>
+                <span class="spec-block-val">Database Relasional Terstruktur</span>
+              </div>
+              <div class="spec-block">
+                <span class="spec-block-lbl">HASIL AKHIR</span>
+                <span class="spec-block-val">Stok tercatat 100% akurat tanpa selisih saat diuji pesanan serentak</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Proyek 02 -->
+        <article class="case-study-card">
+          <div class="case-header">
+            <span>STUDI KASUS</span>
+            <span>VISUALISASI DATA 3D INTERAKTIF</span>
+          </div>
+          <div class="case-body">
+            <div>
+              <h2 class="case-name">Dashboard Visualisasi Metrik Logistik Berbasis Three.js</h2>
+              <p class="case-text">
+                Aplikasi dashboard interaktif untuk memantau pergerakan armada pengiriman barang secara langsung (real-time). 
+                Menggantikan bagan statis dengan peta 3D interaktif yang ringan, lancar, dan mudah dipahami oleh tim operasional.
+              </p>
+
+              <div class="case-architecture">
+                <div class="arch-title">SOROTAN CARA KERJA SISTEM:</div>
+                <div class="arch-desc">
+                  Menggunakan teknologi grafika 3D Three.js yang mampu menampilkan ribuan titik armada logistik secara mulus tanpa membuat komputer atau ponsel pengguna menjadi lambat. 
+                  Data posisi rute diperbarui secara langsung melalui koneksi internet berkecepatan tinggi.
+                </div>
+              </div>
+
+              <div class="case-tags">
+                <span>Three.js</span>
+                <span>WebGL 3D</span>
+                <span>JavaScript Modern</span>
+                <span>Real-Time Data</span>
+                <span>Vite</span>
+              </div>
+
+              <div class="case-actions">
+                <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="hardware-btn primary-btn">
+                  <span>Kode Sumber</span>
+                  <span>&nearr;</span>
+                </a>
+                <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="hardware-btn secondary-btn">
+                  <span>Demo Langsung</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="case-spec-column">
+              <div class="spec-block">
+                <span class="spec-block-lbl">PERAN UTAMA</span>
+                <span class="spec-block-val">Frontend &amp; 3D Graphics Developer</span>
+              </div>
+              <div class="spec-block">
+                <span class="spec-block-lbl">PERFORMA SISTEM</span>
+                <span class="spec-block-val">Sangat Ringan &amp; Lancar (60 FPS Stabil)</span>
+              </div>
+              <div class="spec-block">
+                <span class="spec-block-lbl">HASIL AKHIR</span>
+                <span class="spec-block-val">Tampilan peta 3D interaktif hemat memori di layar komputer maupun ponsel</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Proyek 03 -->
+        <article class="case-study-card">
+          <div class="case-header">
+            <span>STUDI KASUS</span>
+            <span>OTOMATISASI &amp; SISTEM ANTREAN</span>
+          </div>
+          <div class="case-body">
+            <div>
+              <h2 class="case-name">Engine Pipeline Eksekusi Tugas &amp; Penjadwalan Asinkron</h2>
+              <p class="case-text">
+                Sistem otomatisasi untuk mengatur antrean dan jadwal pekerjaan komputer di balik layar. 
+                Sistem ini memastikan setiap pekerjaan (seperti pembuatan laporan atau pengiriman email massal) dijalankan sesuai urutan yang tepat tanpa saling bertabrakan atau macet.
+              </p>
+
+              <div class="case-architecture">
+                <div class="arch-title">SOROTAN CARA KERJA SISTEM:</div>
+                <div class="arch-desc">
+                  Menggunakan diagram alur kerja terstruktur untuk menentukan tugas mana yang harus selesai terlebih dahulu. 
+                  Jika terjadi gangguan koneksi internet sementara, sistem akan mencoba ulang otomatis secara bertahap dan mencatat riwayat kejadian dengan rapi.
+                </div>
+              </div>
+
+              <div class="case-tags">
+                <span>Antrean Tugas</span>
+                <span>TypeScript</span>
+                <span>Otomatisasi Sistem</span>
+                <span>PostgreSQL</span>
+              </div>
+
+              <div class="case-actions">
+                <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="hardware-btn primary-btn">
+                  <span>Kode Sumber</span>
+                  <span>&nearr;</span>
+                </a>
+                <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="hardware-btn secondary-btn">
+                  <span>Dokumentasi API</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="case-spec-column">
+              <div class="spec-block">
+                <span class="spec-block-lbl">PERAN UTAMA</span>
+                <span class="spec-block-val">Junior Backend Developer</span>
+              </div>
+              <div class="spec-block">
+                <span class="spec-block-lbl">ALUR KERJA</span>
+                <span class="spec-block-val">Penjadwalan Terstruktur Otomatis</span>
+              </div>
+              <div class="spec-block">
+                <span class="spec-block-lbl">HASIL AKHIR</span>
+                <span class="spec-block-val">100% tugas selesai teratur tanpa ada antrean yang macet</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-copy">
+          &copy; 2026 Muhammad Daffa &bull; Junior Software Developer
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://instagram.com/dffaaaaa6" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://tiktok.com/@thenighttweemet" target="_blank" rel="noopener">TikTok</a>
+          <a href="/contact.html">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupCommonNav } from '/src/nav.js';
+      document.addEventListener('DOMContentLoaded', () => {
+        setupCommonNav('projects');
+      });
+    </script>
+  </body>
+</html>

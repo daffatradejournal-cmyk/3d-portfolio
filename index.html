@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muhammad Daffa — Junior Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Kanvas 3D Viewport Penuh: Melingkupi 100vw x 100vh tanpa batasan kontainer -->
+    <canvas id="hero-badge-canvas"></canvas>
+
+    <!-- Navigasi Atas Bersih & Elegan -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <span class="status-dot"></span>
+        <a href="/" class="mono-brand">Muhammad Daffa &bull; Dev</a>
+        <span class="spec-divider">|</span>
+        <span class="mono-meta" id="live-clock">00:00:00 UTC // 00:00:00 WIB</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="/" class="nav-item active" data-page="home">Beranda</a>
+        <a href="/about.html" class="nav-item" data-page="about">Tentang Saya</a>
+        <a href="/projects.html" class="nav-item" data-page="projects">Proyek</a>
+        <a href="/contact.html" class="nav-item" data-page="contact">Kontak</a>
+      </nav>
+
+      <div class="nav-right">
+        <button id="sound-toggle-btn" class="hardware-btn-sm" title="Aktifkan / Matikan Suara Klik Mekanikal">
+          <span class="led-dot active" id="sound-led"></span>
+          <span id="sound-label">Suara: On</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="main-wrapper">
+      <!-- HERO SECTION: 3D LANYARD ID BADGE TAHAP LUAS BEBAS AYUN -->
+      <section class="hero-stage-container">
+        <!-- Lapisan Teks Hero (Aksesibel & Interaktif) -->
+        <div class="hero-content-layer">
+          <div class="badge-pill">
+            <span>JUNIOR SOFTWARE DEVELOPER</span>
+            <span class="text-orange">&bull;</span>
+            <span>DETAIL-ORIENTED</span>
+          </div>
+
+          <h1 class="hero-main-title">
+            Muhammad Daffa<span class="text-orange">.</span>
+          </h1>
+
+          <div class="hero-sub-title">
+            Junior Software Developer // Precision Code &amp; System Architecture
+          </div>
+
+          <p class="hero-narrative">
+            Pengembang perangkat lunak yang berfokus pada ketelitian logika, arsitektur kode yang bersih, 
+            struktur data yang konsisten, serta antarmuka web interaktif yang cepat, tangguh, dan terukur.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="/projects.html" class="hardware-btn primary-btn">
+              <span>Lihat Proyek</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="/about.html" class="hardware-btn secondary-btn">
+              <span>Tentang Saya</span>
+            </a>
+          </div>
+
+          <!-- Petunjuk Interaksi 3D Bersih -->
+          <div class="orbit-guide">
+            <span class="guide-icon">✦</span>
+            <span>
+              <strong>Interaksi 3D:</strong> Klik &amp; tarik kartu ID untuk mengayunkannya bebas melintasi layar &bull; Arahkan kursor untuk melihat sudut kemiringan
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigasi Modul Halaman -->
+      <section class="home-modules-section">
+        <h2 class="home-section-title">Eksplorasi Profil &amp; Karya</h2>
+        <p class="home-section-sub">Pelajari pendekatan rekayasa, studi kasus proyek, dan kanal komunikasi langsung:</p>
+
+        <div class="home-modules-grid">
+          <div class="module-card">
+            <span class="card-num">PROFIL &amp; PRINSIP</span>
+            <h3 class="card-title">Tentang Saya</h3>
+            <p class="card-desc">
+              Filosofi kode bersih, komitmen terhadap ketelitian detail, pemodelan arsitektur sistem, dan standar rekayasa perangkat lunak.
+            </p>
+            <a href="/about.html" class="card-link">Buka Profil &rarr;</a>
+          </div>
+
+          <div class="module-card">
+            <span class="card-num">STUDI KASUS REKAYASA</span>
+            <h3 class="card-title">Studi Kasus Proyek</h3>
+            <p class="card-desc">
+              Dokumentasi sistem produksi: manajemen logistik berbasis SQL ACID, visualisasi metrik performa WebGL, dan arsitektur alur kerja.
+            </p>
+            <a href="/projects.html" class="card-link">Buka Proyek &rarr;</a>
+          </div>
+
+          <div class="module-card">
+            <span class="card-num">KOMUNIKASI LANGSUNG</span>
+            <h3 class="card-title">Hubungi Saya</h3>
+            <p class="card-desc">
+              Terbuka untuk peluang rekayasa perangkat lunak, posisi junior developer, kolaborasi proyek web modern, dan konsultasi teknis.
+            </p>
+            <a href="/contact.html" class="card-link">Kirim Pesan &rarr;</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-copy">
+          &copy; 2026 Muhammad Daffa &bull; Junior Software Developer
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://instagram.com/dffaaaaa6" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://tiktok.com/@thenighttweemet" target="_blank" rel="noopener">TikTok</a>
+          <a href="/contact.html">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupCommonNav } from '/src/nav.js';
+      import { BadgeScene } from '/src/badge.js';
+      import { gsap } from 'gsap';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        setupCommonNav('home');
+
+        const canvas = document.getElementById('hero-badge-canvas');
+        if (canvas) {
+          new BadgeScene(canvas, () => {
+            // Animasi masuk sinkron & elegan bersama jatuhnya kartu 3D
+            const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+            tl.fromTo('.badge-pill',
+              { opacity: 0, y: 18 },
+              { opacity: 1, y: 0, duration: 0.65 }
+            )
+            .fromTo('.hero-main-title',
+              { opacity: 0, y: 28 },
+              { opacity: 1, y: 0, duration: 0.75 },
+              '-=0.45'
+            )
+            .fromTo('.hero-sub-title',
+              { opacity: 0, y: 18 },
+              { opacity: 1, y: 0, duration: 0.65 },
+              '-=0.45'
+            )
+            .fromTo('.hero-narrative',
+              { opacity: 0, y: 18 },
+              { opacity: 1, y: 0, duration: 0.65 },
+              '-=0.45'
+            )
+            .fromTo('.hero-cta-group a',
+              { opacity: 0, y: 16, scale: 0.96 },
+              { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.1 },
+              '-=0.35'
+            )
+            .fromTo('.orbit-guide',
+              { opacity: 0, y: 14 },
+              { opacity: 1, y: 0, duration: 0.6 },
+              '-=0.3'
+            );
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

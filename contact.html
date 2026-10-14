@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontak — Muhammad Daffa // Junior Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Navigasi Atas -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <span class="status-dot"></span>
+        <a href="/" class="mono-brand">Muhammad Daffa &bull; Dev</a>
+        <span class="spec-divider">|</span>
+        <span class="mono-meta" id="live-clock">00:00:00 UTC // 00:00:00 WIB</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="/" class="nav-item" data-page="home">Beranda</a>
+        <a href="/about.html" class="nav-item" data-page="about">Tentang Saya</a>
+        <a href="/projects.html" class="nav-item" data-page="projects">Proyek</a>
+        <a href="/contact.html" class="nav-item active" data-page="contact">Kontak</a>
+      </nav>
+
+      <div class="nav-right">
+        <button id="sound-toggle-btn" class="hardware-btn-sm" title="Aktifkan / Matikan Suara Klik Mekanikal">
+          <span class="led-dot active" id="sound-led"></span>
+          <span id="sound-label">Suara: On</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Konten Utama -->
+    <main class="main-wrapper">
+      <div class="page-header">
+        <div class="page-category">KOMUNIKASI LANGSUNG</div>
+        <h1 class="page-title">Mulai Diskusi &amp; Kolaborasi Rekayasa</h1>
+      </div>
+
+      <div class="contact-container">
+        <!-- Kotak Email Langsung -->
+        <div class="contact-card">
+          <h2 class="home-section-title">Kirim Pesan Langsung</h2>
+          <p class="contact-sub">
+            Terbuka untuk peluang posisi Junior Software Developer, pengembangan website dan aplikasi modern, 
+            perancangan database, maupun diskusi proyek perangkat lunak.
+          </p>
+
+          <div class="email-box">
+            <span id="email-text">daffatradejournal@gmail.com</span>
+            <button id="copy-email-btn" class="hardware-btn-sm">
+              <span id="copy-text">Salin Email</span>
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 1rem;">
+            <a href="mailto:daffatradejournal@gmail.com" class="hardware-btn primary-btn" style="width: 100%; justify-content: center;">
+              <span>Buka Aplikasi Email</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <div style="margin-top: 2rem; border-top: 1.5px solid var(--border-subtle); padding-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+            <div>LOKASI: Riau, Indonesia (WIB // UTC+07:00)</div>
+            <div style="margin-top: 0.4rem;">ESTIMASI RESPON: &lt; 24 Jam Kerja</div>
+          </div>
+        </div>
+
+        <!-- Kanal Media Sosial Resmi -->
+        <div class="contact-card">
+          <h2 class="home-section-title">Kanal Terverifikasi</h2>
+          <p class="contact-sub">
+            Terhubung melalui jaringan media sosial dan repositori kode resmi saya:
+          </p>
+
+          <div class="social-links-list">
+            <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="social-link-item">
+              <span>Repositori GitHub <small style="font-family: var(--font-mono); font-weight: 500; color: var(--text-muted); margin-left: 0.4rem;">@daffatradejournal-cmyk</small></span>
+              <span>&nearr;</span>
+            </a>
+
+            <a href="https://instagram.com/dffaaaaa6" target="_blank" rel="noopener" class="social-link-item">
+              <span>Instagram <small style="font-family: var(--font-mono); font-weight: 500; color: var(--text-muted); margin-left: 0.4rem;">@dffaaaaa6</small></span>
+              <span>&nearr;</span>
+            </a>
+
+            <a href="https://tiktok.com/@thenighttweemet" target="_blank" rel="noopener" class="social-link-item">
+              <span>TikTok <small style="font-family: var(--font-mono); font-weight: 500; color: var(--text-muted); margin-left: 0.4rem;">@thenighttweemet</small></span>
+              <span>&nearr;</span>
+            </a>
+
+            <div class="social-link-item" style="opacity: 0.65; cursor: default;" title="Akun LinkedIn belum tersedia">
+              <span>Profil LinkedIn <small style="font-family: var(--font-mono); font-weight: 500; color: var(--text-muted); margin-left: 0.4rem;">(Segera Hadir)</small></span>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">&mdash;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-copy">
+          &copy; 2026 Muhammad Daffa &bull; Junior Software Developer
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://instagram.com/dffaaaaa6" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://tiktok.com/@thenighttweemet" target="_blank" rel="noopener">TikTok</a>
+          <a href="/contact.html">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { setupCommonNav } from '/src/nav.js';
+      import { sound } from '/src/audio.js';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        setupCommonNav('contact');
+
+        const copyBtn = document.getElementById('copy-email-btn');
+        const emailText = document.getElementById('email-text');
+        const copyLabel = document.getElementById('copy-text');
+
+        if (copyBtn && emailText) {
+          copyBtn.addEventListener('click', async () => {
+            sound.playKeyClick(true);
+            try {
+              await navigator.clipboard.writeText(emailText.innerText.trim());
+              copyLabel.innerText = 'Tersalin!';
+              setTimeout(() => {
+                copyLabel.innerText = 'Salin Email';
+              }, 2000);
+            } catch (e) {
+              copyLabel.innerText = 'Tersalin!';
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
