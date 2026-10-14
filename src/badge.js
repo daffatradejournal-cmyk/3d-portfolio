@@ -844,8 +844,7 @@ export class BadgeScene {
       
       if (hits.length > 0) {
         this.isDragging = true;
-        this.canvas.style.pointerEvents = 'auto';
-        this.canvas.style.cursor = 'grabbing';
+        document.body.style.cursor = 'grabbing';
         document.body.style.userSelect = 'none';
         document.body.style.webkitUserSelect = 'none';
 
@@ -888,24 +887,17 @@ export class BadgeScene {
         this.cardRot.x += -dy * 0.008;
         this.cardRot.z += dx * 0.005;
       } else {
+        // Mode hover kursor pada desktop
         this.raycaster.setFromCamera(this.pointer, this.camera);
         const hits = this.raycaster.intersectObject(this.frameMesh, true);
-
-        if (hits.length > 0) {
-          this.canvas.style.pointerEvents = 'auto';
-          this.canvas.style.cursor = 'grab';
-        } else {
-          this.canvas.style.pointerEvents = 'none';
-          this.canvas.style.cursor = 'default';
-        }
+        document.body.style.cursor = hits.length > 0 ? 'grab' : 'default';
       }
     };
 
     const endDrag = () => {
       if (this.isDragging) {
         this.isDragging = false;
-        this.canvas.style.pointerEvents = 'none'; // KUNCI UTAMA: Bebaskan kanvas seketika agar tombol & scroll tidak terhalang!
-        this.canvas.style.cursor = 'default';
+        document.body.style.cursor = 'default';
         document.body.style.userSelect = '';
         document.body.style.webkitUserSelect = '';
         sound.playKeyClick(false);
@@ -913,20 +905,19 @@ export class BadgeScene {
     };
 
     // 1. DUKUNGAN LAYAR SENTUH (TABLET & SMARTPHONE)
-    // Menggunakan { passive: false } agar e.preventDefault() dapat mencegah browser mengambil alih scrolling saat kartu ditarik
     window.addEventListener('touchstart', (e) => {
       if (e.touches.length === 1) {
         const touch = e.touches[0];
         const hit = startDrag(touch.clientX, touch.clientY);
         if (hit) {
-          e.preventDefault(); // Mencegah scrolling browser dan menu sentuhan lama
+          e.preventDefault(); // Mencegah scrolling browser HANYA jika jari menyentuh kartu 3D
         }
       }
     }, { passive: false });
 
     window.addEventListener('touchmove', (e) => {
       if (this.isDragging && e.touches.length > 0) {
-        e.preventDefault(); // KUNCI UTAMA: Tahan gesture scroll browser saat kartu sedang ditarik jari!
+        e.preventDefault(); // Tahan scroll HANYA saat kartu sedang ditarik jari
         const touch = e.touches[0];
         moveDrag(touch.clientX, touch.clientY);
       }
@@ -934,18 +925,19 @@ export class BadgeScene {
 
     window.addEventListener('touchend', () => {
       endDrag();
-      this.canvas.style.pointerEvents = 'none';
     });
 
     window.addEventListener('touchcancel', () => {
       endDrag();
-      this.canvas.style.pointerEvents = 'none';
     });
 
     // 2. DUKUNGAN MOUSE & POINTER (LAPTOP & DESKTOP)
     window.addEventListener('pointerdown', (e) => {
       if (e.pointerType === 'touch') return; // Sudah ditangani oleh touchstart secara presisi
-      startDrag(e.clientX, e.clientY);
+      const hit = startDrag(e.clientX, e.clientY);
+      if (hit) {
+        e.preventDefault(); // Mencegah klik tombol di balik kartu HANYA saat kursor mengeklik kartu 3D
+      }
     });
 
     window.addEventListener('pointermove', (e) => {
@@ -956,13 +948,11 @@ export class BadgeScene {
     window.addEventListener('pointerup', (e) => {
       if (e.pointerType === 'touch') return;
       endDrag();
-      this.canvas.style.pointerEvents = 'none';
     });
 
     window.addEventListener('pointercancel', (e) => {
       if (e.pointerType === 'touch') return;
       endDrag();
-      this.canvas.style.pointerEvents = 'none';
     });
   }
 

@@ -262,7 +262,7 @@ body {
 
 .hero-content-layer {
   position: relative;
-  z-index: 15;
+  z-index: 2;
   max-width: 580px;
   display: flex;
   flex-direction: column;
@@ -324,7 +324,7 @@ body {
   gap: 1.25rem;
   margin-bottom: 2.5rem;
   position: relative;
-  z-index: 20;
+  z-index: 2;
 }
 
 .orbit-guide {
