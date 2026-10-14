@@ -904,7 +904,8 @@ export class BadgeScene {
     const endDrag = () => {
       if (this.isDragging) {
         this.isDragging = false;
-        this.canvas.style.cursor = 'grab';
+        this.canvas.style.pointerEvents = 'none'; // KUNCI UTAMA: Bebaskan kanvas seketika agar tombol & scroll tidak terhalang!
+        this.canvas.style.cursor = 'default';
         document.body.style.userSelect = '';
         document.body.style.webkitUserSelect = '';
         sound.playKeyClick(false);
@@ -933,10 +934,12 @@ export class BadgeScene {
 
     window.addEventListener('touchend', () => {
       endDrag();
+      this.canvas.style.pointerEvents = 'none';
     });
 
     window.addEventListener('touchcancel', () => {
       endDrag();
+      this.canvas.style.pointerEvents = 'none';
     });
 
     // 2. DUKUNGAN MOUSE & POINTER (LAPTOP & DESKTOP)
@@ -953,11 +956,13 @@ export class BadgeScene {
     window.addEventListener('pointerup', (e) => {
       if (e.pointerType === 'touch') return;
       endDrag();
+      this.canvas.style.pointerEvents = 'none';
     });
 
     window.addEventListener('pointercancel', (e) => {
       if (e.pointerType === 'touch') return;
       endDrag();
+      this.canvas.style.pointerEvents = 'none';
     });
   }
 
