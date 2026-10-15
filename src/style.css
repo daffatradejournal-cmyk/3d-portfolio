@@ -330,20 +330,47 @@ body {
 .orbit-guide {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
+  gap: 1.25rem;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--text-muted);
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.025);
   border: 1px dashed var(--border-aluminum);
   padding: 0.75rem 1rem;
   border-radius: 4px;
-  max-width: 500px;
+  max-width: 580px;
+  position: relative;
+  z-index: 2;
+}
+
+.orbit-guide-text {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  line-height: 1.45;
+  flex: 1;
 }
 
 .guide-icon {
   color: var(--safety-orange);
-  font-size: 1rem;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.lanyard-ctrl-btn {
+  flex-shrink: 0;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .orbit-guide {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
 }
 
 /* Ringkasan Modul Beranda */

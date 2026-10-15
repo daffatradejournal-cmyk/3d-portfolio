@@ -75,12 +75,18 @@
             </a>
           </div>
 
-          <!-- Petunjuk Interaksi 3D Bersih -->
+          <!-- Petunjuk Interaksi 3D & Tombol Sakelar On/Off Lanyard -->
           <div class="orbit-guide">
-            <span class="guide-icon">✦</span>
-            <span>
-              <strong>Interaksi 3D:</strong> Klik &amp; tarik kartu ID untuk mengayunkannya bebas melintasi layar &bull; Arahkan kursor untuk melihat sudut kemiringan
-            </span>
+            <div class="orbit-guide-text">
+              <span class="guide-icon">✦</span>
+              <span>
+                <strong>Interaksi 3D:</strong> Klik &amp; tarik kartu ID untuk mengayunkannya bebas melintasi layar &bull; Arahkan kursor untuk melihat sudut kemiringan
+              </span>
+            </div>
+            <button id="lanyard-toggle-btn" class="hardware-btn-sm lanyard-ctrl-btn" type="button" title="Tampilkan / Sembunyikan Lanyard 3D">
+              <span class="led-dot active" id="lanyard-led"></span>
+              <span id="lanyard-label">Lanyard: On</span>
+            </button>
           </div>
         </div>
       </section>
@@ -146,7 +152,7 @@
 
         const canvas = document.getElementById('hero-badge-canvas');
         if (canvas) {
-          new BadgeScene(canvas, () => {
+          const badgeScene = new BadgeScene(canvas, () => {
             // Animasi masuk sinkron & elegan bersama jatuhnya kartu 3D
             const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
@@ -174,6 +180,19 @@
               '-=0.3'
             );
           });
+
+          // Kontrol On / Off 3D Lanyard
+          const lanyardBtn = document.getElementById('lanyard-toggle-btn');
+          const lanyardLed = document.getElementById('lanyard-led');
+          const lanyardLabel = document.getElementById('lanyard-label');
+
+          if (lanyardBtn) {
+            lanyardBtn.addEventListener('click', () => {
+              const isActive = badgeScene.toggleLanyard();
+              if (lanyardLed) lanyardLed.classList.toggle('active', isActive);
+              if (lanyardLabel) lanyardLabel.innerText = isActive ? 'Lanyard: On' : 'Lanyard: Off';
+            });
+          }
         }
       });
     </script>

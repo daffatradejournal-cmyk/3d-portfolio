@@ -14,19 +14,23 @@ export class BadgeScene {
     this.canvas = canvas;
     this.onReady = onReady;
     this.hasEntered = false;
+    this.isLanyardActive = true;
     this.isDragging = false;
     this.mouse = { x: 0, y: 0, prevX: 0, prevY: 0 };
     this.profileImage = null;
 
-    // Anchor point di atas layar (di luar batas atas viewport)
+    // Anchor point di atas langit-langit (di luar batas atas viewport)
     this.defaultAnchorX = window.innerWidth < 960 ? 0 : 1.4;
-    this.anchor = new THREE.Vector3(this.defaultAnchorX, 3.6, 0);
+    this.anchor = new THREE.Vector3(this.defaultAnchorX, 8.0, 0);
 
     // Posisi istirahat slot kartu
     this.restClipPos = new THREE.Vector3(this.defaultAnchorX, 1.15, 0);
 
+    // Posisi tertarik ke atas saat Lanyard dimatikan (OFF)
+    this.retractPos = new THREE.Vector3(this.defaultAnchorX, 5.8, 0);
+
     // Fisika posisi klip: mulai dari atas luar layar untuk animasi jatuh
-    this.clipPos = new THREE.Vector3(this.defaultAnchorX, 4.4, 0);
+    this.clipPos = new THREE.Vector3(this.defaultAnchorX, 5.2, 0);
     this.clipVel = new THREE.Vector3(0, 0, 0);
 
     // Offset saat pengguna mengeklik kartu
@@ -58,8 +62,9 @@ export class BadgeScene {
     const aspect = w / h;
 
     this.defaultAnchorX = w < 960 ? 0 : 1.4;
-    this.anchor.set(this.defaultAnchorX, 3.6, 0);
+    this.anchor.set(this.defaultAnchorX, 8.0, 0);
     this.restClipPos.set(this.defaultAnchorX, 1.15, 0);
+    this.retractPos.set(this.defaultAnchorX, 5.8, 0);
 
     this.camera = new THREE.PerspectiveCamera(36, aspect, 0.1, 50);
     this.camera.position.set(0, 0, 7.5);
@@ -171,8 +176,8 @@ export class BadgeScene {
       this.cardRot.x = 0;
       this.cardRot.y = 0;
     } else {
-      this.clipPos.set(this.defaultAnchorX, 4.4, 0);
-      this.clipVel.set(0, -8.5, 0);
+      this.clipPos.set(this.defaultAnchorX, 5.2, 0);
+      this.clipVel.set(0, -9.0, 0);
       this.cardRot.z = 0.28;
       this.cardRot.x = 0.24;
       this.cardRot.y = -0.16;
@@ -185,6 +190,49 @@ export class BadgeScene {
     if (typeof this.onReady === 'function') {
       this.onReady();
     }
+  }
+
+  // Kontrol On / Off 3D Lanyard: ditarik ke atas saat OFF, jatuh kembali saat ON
+  toggleLanyard() {
+    if (this.isLanyardActive) {
+      this.retractLanyard();
+      return false;
+    } else {
+      this.dropLanyard();
+      return true;
+    }
+  }
+
+  retractLanyard() {
+    this.isLanyardActive = false;
+    this.isDragging = false;
+    document.body.style.cursor = 'default';
+    document.body.style.userSelect = '';
+    document.body.style.webkitUserSelect = '';
+
+    // Upward launch impulse: dorongan terangkat ke atas secara realistis
+    this.clipVel.y = Math.max(this.clipVel.y + 6.0, 9.2);
+    this.clipVel.x *= 0.5;
+    this.cardRot.velX = 0.6;
+    this.cardRot.velZ = -0.22;
+
+    sound.playToggle();
+  }
+
+  dropLanyard() {
+    this.isLanyardActive = true;
+    // Jika posisi kartu sudah berada di atas layar, atur titik awal jatuh
+    if (this.clipPos.y > 5.0) {
+      this.clipPos.y = 5.2;
+    }
+    // Downward drop impulse (jatuh kembali dari atas dengan inersia ayunan alami)
+    this.clipVel.set(0, -9.0, 0);
+    this.cardRot.z = 0.28;
+    this.cardRot.x = 0.24;
+    this.cardRot.y = -0.16;
+    this.cardRot.velZ = -0.4;
+
+    sound.playToggle();
   }
 
   refreshCardTexture() {
@@ -838,6 +886,7 @@ export class BadgeScene {
     };
 
     const startDrag = (clientX, clientY) => {
+      if (!this.isLanyardActive) return false;
       const worldPos = getPointerWorld(clientX, clientY);
       this.raycaster.setFromCamera(this.pointer, this.camera);
       const hits = this.raycaster.intersectObject(this.frameMesh, true);
@@ -859,6 +908,10 @@ export class BadgeScene {
     };
 
     const moveDrag = (clientX, clientY) => {
+      if (!this.isLanyardActive) {
+        document.body.style.cursor = 'default';
+        return;
+      }
       const worldPos = getPointerWorld(clientX, clientY);
 
       if (this.isDragging) {
@@ -962,8 +1015,9 @@ export class BadgeScene {
     if (w === 0 || h === 0) return;
 
     this.defaultAnchorX = w < 960 ? 0 : 1.4;
-    this.anchor.set(this.defaultAnchorX, 3.6, 0);
+    this.anchor.set(this.defaultAnchorX, 8.0, 0);
     this.restClipPos.set(this.defaultAnchorX, 1.15, 0);
+    this.retractPos.set(this.defaultAnchorX, 5.8, 0);
 
     if (this.keyLight) {
       this.keyLight.position.set(this.defaultAnchorX + 1.2, 4.5, 4.2);
@@ -998,18 +1052,26 @@ export class BadgeScene {
     this.sceneRoot.position.y = scrollY * worldPerPixel;
 
     // 2. Kilau Specular PointLight bergerak halus mengikuti kursor
-    if (this.specularLight) {
+    if (this.specularLight && this.isLanyardActive) {
       this.specularLight.position.x = this.defaultAnchorX + 1.0 + this.pointer.x * 1.5;
       this.specularLight.position.y = 1.8 + this.pointer.y * 1.2;
     }
 
-    // 3. Fisika posisi slot kartu saat tidak diseret (Spring Pendulum Alami)
+    // 3. Fisika posisi slot kartu saat tidak diseret (Spring Pendulum Alami & Retraction Realistis)
     if (!this.isDragging) {
-      const springK = 14.0;
-      const dampK = 2.8;
+      let targetX = this.restClipPos.x;
+      let targetY = this.restClipPos.y;
+      let springK = 14.0;
+      let dampK = 2.8;
 
-      const forceX = (this.restClipPos.x - this.clipPos.x) * springK - this.clipVel.x * dampK;
-      const forceY = (this.restClipPos.y - this.clipPos.y) * springK - this.clipVel.y * dampK;
+      if (!this.isLanyardActive) {
+        targetY = this.retractPos.y;
+        springK = 10.0;
+        dampK = 3.6;
+      }
+
+      const forceX = (targetX - this.clipPos.x) * springK - this.clipVel.x * dampK;
+      const forceY = (targetY - this.clipPos.y) * springK - this.clipVel.y * dampK;
 
       this.clipVel.x += forceX * dt;
       this.clipVel.y += forceY * dt;
@@ -1018,14 +1080,19 @@ export class BadgeScene {
       this.clipPos.y += this.clipVel.y * dt;
     }
 
+    // Shadow plane opacity mengikuti ketinggian kartu (menghilang saat ditarik ke atas)
+    if (this.shadowPlane && this.shadowPlane.material) {
+      const liftProgress = Math.max(0, Math.min(1, (this.clipPos.y - this.restClipPos.y) / 3.0));
+      this.shadowPlane.material.opacity = 0.14 * (1 - liftProgress);
+    }
+
     // 4. Fisika Ayunan Rotasi Kartu ID (Inersia + Rotasi 360 Derajat + Kemiringan Hover)
     const strapDirX = this.clipPos.x - this.anchor.x;
-    const strapDirY = this.anchor.y - this.clipPos.y;
-    const strapAngleZ = Math.atan2(strapDirX, Math.max(0.1, strapDirY));
+    const strapAngleZ = Math.atan2(strapDirX, 2.5);
 
     const t = performance.now() * 0.0015;
-    const idleZ = Math.sin(t * 1.4) * 0.015;
-    const idleX = Math.cos(t * 1.1) * 0.012;
+    const idleZ = this.isLanyardActive ? Math.sin(t * 1.4) * 0.015 : 0;
+    const idleX = this.isLanyardActive ? Math.cos(t * 1.1) * 0.012 : 0;
 
     let targetRotZ = strapAngleZ + idleZ;
     let targetRotX = idleX;
@@ -1034,7 +1101,7 @@ export class BadgeScene {
     if (this.isDragging) {
       targetRotZ -= this.clipVel.x * 0.035;
       targetRotX += this.clipVel.y * 0.03;
-    } else {
+    } else if (this.isLanyardActive) {
       // Kemiringan hover perspektif saat kursor melayang
       targetRotZ += this.pointer.x * 0.14;
       targetRotX += -this.pointer.y * 0.12;
@@ -1043,6 +1110,13 @@ export class BadgeScene {
       const springYaw = 6.0;
       const dampYaw = 2.4;
       this.cardRot.velY += ((targetRotY - this.cardRot.y) * springYaw - this.cardRot.velY * dampYaw) * dt;
+      this.cardRot.y += this.cardRot.velY * dt;
+    } else {
+      // Saat ditarik ke atas: berikan sudut kemiringan terangkat
+      targetRotX = 0.16;
+      const springYaw = 8.0;
+      const dampYaw = 3.2;
+      this.cardRot.velY += ((0 - this.cardRot.y) * springYaw - this.cardRot.velY * dampYaw) * dt;
       this.cardRot.y += this.cardRot.velY * dt;
     }
 
@@ -1066,7 +1140,7 @@ export class BadgeScene {
     // Tanpa ada celah / gap sama sekali!
     const clampMouthWorld = new THREE.Vector3(0, 0.62, 0).applyMatrix4(this.badgeAssembly.matrixWorld);
     const strapVec = new THREE.Vector3().subVectors(clampMouthWorld, this.anchor);
-    const strapLen = strapVec.length();
+    const strapLen = Math.max(0.01, strapVec.length());
     const strapDir = strapVec.clone().normalize();
 
     this.strapMesh.position.copy(this.anchor).addScaledVector(strapDir, strapLen * 0.5);
