@@ -547,6 +547,74 @@ body {
 }
 
 /* =========================================================================
+   KEAHLIAN & TEKNOLOGI: HARDWARE TECH CHIPS (ANTI-SLOP INDUSTRIAL SPEC)
+   ========================================================================= */
+.tech-group {
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.tech-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tech-group-title::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--safety-orange);
+  border-radius: 1px;
+}
+
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 0.8rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-aluminum);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-main);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.15s ease;
+  user-select: none;
+  cursor: default;
+}
+
+.tech-chip:hover {
+  background: #FFFFFF;
+  border-color: var(--text-main);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tech-chip svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+/* =========================================================================
    HALAMAN: PROYEK
    ========================================================================= */
 .projects-case-list {

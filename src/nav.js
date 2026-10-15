@@ -47,8 +47,8 @@ export function setupCommonNav(activePageName) {
     }
   });
 
-  // Sound feedback on buttons
-  document.querySelectorAll('button, .hardware-btn, .hardware-btn-sm, .nav-item, .project-link').forEach((el) => {
+  // Sound feedback on buttons and hardware tech chips
+  document.querySelectorAll('button, .hardware-btn, .hardware-btn-sm, .nav-item, .project-link, .tech-chip').forEach((el) => {
     el.addEventListener('click', () => {
       sound.playKeyClick(true);
     });
