@@ -50,38 +50,37 @@
         <article class="case-study-card">
           <div class="case-header">
             <span>STUDI KASUS</span>
-            <span>MANAJEMEN INVENTARIS &amp; LOGISTIK</span>
+            <span>MANAJEMEN INVENTARIS &amp; KASIR UMKM</span>
           </div>
           <div class="case-body">
             <div>
-              <h2 class="case-name">Sistem Pemantauan Stok &amp; Pesanan Pergudangan Terintegrasi</h2>
+              <h2 class="case-name">Sistem Pemantauan Stok &amp; Kasir Toko Terintegrasi (StokPintar UMKM)</h2>
               <p class="case-text">
-                Aplikasi digital untuk mengelola stok barang dan pesanan di gudang agar pencatatan tidak lagi manual. 
-                Sistem ini memastikan jumlah stok fisik di gudang selalu cocok dengan data di sistem, terutama saat transaksi sedang ramai.
+                Aplikasi web kasir dan manajemen stok siap produksi (*Production-Ready Full-Stack Web App*) yang dirancang khusus untuk kemudahan pemilik toko grosir/sembako, minimarket lokal, dan pelaku UMKM. Memudahkan pencatatan transaksi kasir harian, pengelolaan barang kulakan, dan sinkronisasi stok fisik secara otomatis.
               </p>
 
               <div class="case-architecture">
                 <div class="arch-title">SOROTAN CARA KERJA SISTEM:</div>
                 <div class="arch-desc">
-                  Menerapkan sistem penguncian data otomatis pada database PostgreSQL sehingga dua pembeli tidak bisa berebut satu barang terakhir yang sama (mencegah stok minus). 
-                  Dilengkapi pemindai barcode untuk cek barang masuk-keluar secara instan, serta notifikasi otomatis saat persediaan barang mulai menipis.
+                  Dibangun dengan Next.js 14 App Router yang terhubung langsung ke database PostgreSQL dengan penguncian data otomatis (*Row-Level Locking &amp; CHECK Constraints*) sehingga stok dijamin mustahil minus saat pembeli bertransaksi serentak (teruji simulasi 5-30 pesanan bersamaan). Dilengkapi pemindai barcode kamera HP/laptop untuk pencatatan barang kulakan (*+ IN*) dan keluar (*- OUT*), peringatan otomatis stok menipis, tombol kulakan cepat (+20), serta buku catatan mutasi barang real-time.
                 </div>
               </div>
 
               <div class="case-tags">
-                <span>PostgreSQL</span>
+                <span>Next.js 14</span>
                 <span>TypeScript</span>
-                <span>Manajemen Database</span>
-                <span>REST API</span>
-                <span>Kode Bersih</span>
+                <span>PostgreSQL</span>
+                <span>Tailwind CSS</span>
+                <span>Barcode Scanner</span>
+                <span>Bento Dashboard</span>
               </div>
 
               <div class="case-actions">
-                <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="hardware-btn primary-btn">
+                <a href="https://github.com/daffatradejournal-cmyk/Sistem-Pemantauan-Stok-Pesanan-Pergudangan-Terintegrasi-V1.git" target="_blank" rel="noopener" class="hardware-btn primary-btn">
                   <span>Kode Sumber</span>
                   <span>&nearr;</span>
                 </a>
-                <a href="https://github.com/daffatradejournal-cmyk" target="_blank" rel="noopener" class="hardware-btn secondary-btn">
+                <a href="https://sistem-pemantauan-stok-pesanan-perg-lemon.vercel.app/" target="_blank" rel="noopener" class="hardware-btn secondary-btn">
                   <span>Demo Langsung</span>
                   <span>&rarr;</span>
                 </a>
@@ -91,11 +90,11 @@
             <div class="case-spec-column">
               <div class="spec-block">
                 <span class="spec-block-lbl">PERAN UTAMA</span>
-                <span class="spec-block-val">Junior Backend &amp; Database Developer</span>
+                <span class="spec-block-val">Full-Stack Web &amp; Database Developer</span>
               </div>
               <div class="spec-block">
-                <span class="spec-block-lbl">STRUKTUR DATA</span>
-                <span class="spec-block-val">Database Relasional Terstruktur</span>
+                <span class="spec-block-lbl">ARSITEKTUR KODE</span>
+                <span class="spec-block-val">Next.js 14 &amp; PostgreSQL (ACID)</span>
               </div>
               <div class="spec-block">
                 <span class="spec-block-lbl">HASIL AKHIR</span>
