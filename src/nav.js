@@ -53,4 +53,36 @@ export function setupCommonNav(activePageName) {
       sound.playKeyClick(true);
     });
   });
+
+  // Animasi Scroll Reveal saat halaman discroll ke bawah
+  setupScrollReveal();
+}
+
+export function setupScrollReveal() {
+  if (typeof window === 'undefined') return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    document.querySelectorAll('.reveal-item').forEach((el) => {
+      el.classList.add('is-revealed');
+    });
+    return;
+  }
+
+  const items = document.querySelectorAll('.reveal-item');
+  if (items.length === 0) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -36px 0px'
+  });
+
+  items.forEach((el) => observer.observe(el));
 }
